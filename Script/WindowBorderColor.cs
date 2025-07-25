@@ -21,7 +21,7 @@ namespace HW.UnityPlayerWindowVisual
         /// <summary>
         /// DwmSetWindowAttributeにウィンドウの縁の色の処理であることを示す属性値
         /// </summary>
-        private const int WindowBorderColorAttribute = 34;
+        internal const int WindowBorderColorAttribute = 34;
 
 
         /// <summary>

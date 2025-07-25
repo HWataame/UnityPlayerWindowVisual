@@ -21,7 +21,7 @@ namespace HW.UnityPlayerWindowVisual
         /// <summary>
         /// DwmSetWindowAttributeにタイトルバーの色の処理であることを示す属性値
         /// </summary>
-        private const int DwmWindowCaptionColor = 35;
+        internal const int DwmWindowCaptionColor = 35;
 
 
         /// <summary>
