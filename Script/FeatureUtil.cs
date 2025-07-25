@@ -179,8 +179,8 @@ namespace HW.UnityPlayerWindowVisual
                 // 実行が許可される場合
                 // パラメーターを準備する
                 var parameters = new SetWindowColorsCallbackParameters(
-                    type, borderColorValue, titlebarColorValue,
-                    titlebarTextColorValue, Kernel32Wrapper.GetCurrentProcessId());
+                    type, Kernel32Wrapper.GetCurrentProcessId(),
+                    borderColorValue, titlebarColorValue, titlebarTextColorValue);
 
                 // トップレベルのウィンドウを処理する
                 return User32Wrapper.EnumWindows(SetWindowColorsCallbackCache, ref parameters);
