@@ -35,7 +35,7 @@ namespace HW.UnityPlayerWindowVisual
             // タイトルバーの文字色の設定を試行する
             return FeatureUtil.SetInternal(
                 DwmWindowCaptionTextColor, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowTitlebarColor).Name, "タイトルバーの文字色");
+                typeof(WindowTitlebarTextColor).Name, "タイトルバーの文字色");
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace HW.UnityPlayerWindowVisual
             // タイトルバーの文字色の設定を試行する
             return FeatureUtil.SetInternal(
                 DwmWindowCaptionTextColor, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowTitlebarColor).Name, "タイトルバーの文字色");
+                typeof(WindowTitlebarTextColor).Name, "タイトルバーの文字色");
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace HW.UnityPlayerWindowVisual
             // タイトルバーの文字色の設定を試行する
             return FeatureUtil.SetInternal(
                 DwmWindowCaptionTextColor, ColorUtil.DwmDefaultColor,
-                typeof(WindowTitlebarColor).Name, "タイトルバーの文字色");
+                typeof(WindowTitlebarTextColor).Name, "タイトルバーの文字色");
         }
     }
 }
