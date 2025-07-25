@@ -2,7 +2,7 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ウィンドウの色を設定する用のパラメーターの構造体
 
-SetWindowColorsCallbackParameters.cs
+SetWindowColorCallbackParameters.cs
 ────────────────────────────────────────
 バージョン: 1.0.0
 2025 Wataame(HWataame)
@@ -16,7 +16,7 @@ namespace HW.UnityPlayerWindowVisual
     /// <summary>
     /// ウィンドウの色を設定する用のパラメーターの構造体
     /// </summary>
-    internal readonly ref struct SetWindowColorsCallbackParameters
+    internal readonly ref struct SetWindowColorCallbackParameters
     {
         /// <summary>
         /// 処理を行う属性値
@@ -64,9 +64,9 @@ namespace HW.UnityPlayerWindowVisual
         /// </summary>
         /// <param name="attributeType">処理を行う属性値</param>
         /// <param name="processId">プロセスID</param>
-        /// <param name="colorValue">色を示す値類</param>
+        /// <param name="colorValue">色を示す値</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal SetWindowColorsCallbackParameters(
+        internal SetWindowColorCallbackParameters(
             uint attributeType, uint processId, uint colorValue)
         {
             // 値を受け取る

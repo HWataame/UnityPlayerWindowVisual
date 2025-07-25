@@ -27,9 +27,9 @@ namespace HW.UnityPlayerWindowVisual
         /// </summary>
         private static readonly bool isAllowProcess;
         /// <summary>
-        /// SetWindowColorsCallbackのデリゲートのキャッシュ
+        /// SetWindowColorCallbackのデリゲートのキャッシュ
         /// </summary>
-        private static readonly User32Wrapper.EnumWindowsProc SetWindowColorsCallbackCache;
+        private static readonly User32Wrapper.SingleEnumWindowsProc SetWindowColorCallbackCache;
 #endif
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace HW.UnityPlayerWindowVisual
             // 現在の環境がWindowsのスタンドアロンプレイヤーか判定する
             isAllowProcess = Application.platform == RuntimePlatform.WindowsPlayer;
 
-            // SetWindowColorsCallbackのデリゲートをキャッシュする
-            SetWindowColorsCallbackCache = SetWindowColorsCallback;
+            // SetWindowColorCallbackのデリゲートをキャッシュする
+            SetWindowColorCallbackCache = SetWindowColorCallback;
 #endif
         }
 
@@ -83,11 +83,11 @@ namespace HW.UnityPlayerWindowVisual
             {
                 // 実行が許可される場合
                 // パラメーターを準備する
-                var parameters = new SetWindowColorsCallbackParameters(
+                var parameters = new SetWindowColorCallbackParameters(
                     attributeType, Kernel32Wrapper.GetCurrentProcessId(), colorValue);
 
                 // トップレベルのウィンドウを処理する
-                return User32Wrapper.EnumWindows(SetWindowColorsCallbackCache, ref parameters);
+                return User32Wrapper.EnumWindows(SetWindowColorCallbackCache, ref parameters);
             }
             else
             {
@@ -118,10 +118,10 @@ namespace HW.UnityPlayerWindowVisual
         /// <param name="windowHandle">ウィンドウハンドル</param>
         /// <param name="parameters">パラメーター</param>
         /// <returns>処理を続行するか</returns>
-        [MonoPInvokeCallback(typeof(User32Wrapper.EnumWindowsProc))]
+        [MonoPInvokeCallback(typeof(User32Wrapper.SingleEnumWindowsProc))]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static bool SetWindowColorsCallback(
-            nint windowHandle, ref SetWindowColorsCallbackParameters parameters)
+        private static bool SetWindowColorCallback(
+            nint windowHandle, ref SetWindowColorCallbackParameters parameters)
         {
             if (User32Wrapper.GetWindowThreadProcessId(windowHandle, out var processId) == 0 ||
                 parameters.ProcessId != processId)
