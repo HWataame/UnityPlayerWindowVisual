@@ -33,7 +33,7 @@ Change Standalone Player window visual running on Windows11
 引数には`UnityEngine.Color`または`UnityEngine.Color32`（推奨）で縁の色を指定します
 ```csharp
 // スタンドアロンプレイヤーのウィンドウの縁を赤くする例
-HW.UnityPlayerWindowVisual.WindowBorderColor.Set(new UnityEngine.Color32(1, 0, 0));
+HW.UnityPlayerWindowVisual.WindowBorderColor.Set(new UnityEngine.Color32(255, 0, 0));
 ```
 
 #### ウィンドウの縁の色を既定値に戻す
@@ -60,7 +60,7 @@ HW.UnityPlayerWindowVisual.WindowBorderColor.SetNoneBorder();
 引数には`UnityEngine.Color`または`UnityEngine.Color32`（推奨）でタイトルバーの色を指定します
 ```csharp
 // スタンドアロンプレイヤーのウィンドウのタイトルバーを青くする例
-HW.UnityPlayerWindowVisual.WindowTitlebarColor.Set(new UnityEngine.Color32(0, 0, 1));
+HW.UnityPlayerWindowVisual.WindowTitlebarColor.Set(new UnityEngine.Color32(0, 0, 255));
 ```
 
 #### ウィンドウのタイトルバーの色を既定値に戻す
@@ -77,7 +77,7 @@ HW.UnityPlayerWindowVisual.WindowTitlebarColor.SetDefault();
 引数には`UnityEngine.Color`または`UnityEngine.Color32`（推奨）でタイトルバーの文字色を指定します
 ```csharp
 // スタンドアロンプレイヤーのウィンドウのタイトルバーの文字を緑色にする例
-HW.UnityPlayerWindowVisual.WindowTitlebarTextColor.Set(new UnityEngine.Color32(0, 1, 0));
+HW.UnityPlayerWindowVisual.WindowTitlebarTextColor.Set(new UnityEngine.Color32(0, 255, 0));
 ```
 
 #### ウィンドウのタイトルバーの文字色を既定値に戻す
@@ -93,13 +93,13 @@ HW.UnityPlayerWindowVisual.WindowTitlebarTextColor.SetDefault();
 上記の単体の色の操作と同様に、任意の色の設定（`Set`メソッド）とOS既定色の設定（`SetDefault`メソッド）を使用できます
 ```csharp
 // スタンドアロンプレイヤーのウィンドウの縁とタイトルバーの色を黄色くする例
-HW.UnityPlayerWindowVisual.WindowAroundColors.Set(new UnityEngine.Color32(1, 1, 0));
+HW.UnityPlayerWindowVisual.WindowAroundColors.Set(new UnityEngine.Color32(255, 255, 0));
 
 // スタンドアロンプレイヤーのウィンドウのタイトルバーを黒く、タイトルバーの文字色を赤くする例
-HW.UnityPlayerWindowVisual.WindowTitlebarColors.Set(new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(1, 0, 0));
+HW.UnityPlayerWindowVisual.WindowTitlebarColors.Set(new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(255, 0, 0));
 
 // スタンドアロンプレイヤーのウィンドウの縁とタイトルバーの文字色を赤く、タイトルバーを黒くする例
-HW.UnityPlayerWindowVisual.WindowColors.Set(new UnityEngine.Color32(1, 0, 0), new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(1, 0, 0));
+HW.UnityPlayerWindowVisual.WindowColors.Set(new UnityEngine.Color32(255, 0, 0), new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(255, 0, 0));
 ```
 ウィンドウの縁とタイトルバーの色を同時に設定する機能では、それぞれに同じ色に指定する場合は引数を1個省略できるようになっています
 
@@ -115,7 +115,7 @@ Argument:
 - Border color (`UnityEngine.Color` or `UnityEngine.Color32`(recommended))
 ```csharp
 // Color to Standalone Player window border red
-HW.UnityPlayerWindowVisual.WindowBorderColor.Set(new UnityEngine.Color32(1, 0, 0));
+HW.UnityPlayerWindowVisual.WindowBorderColor.Set(new UnityEngine.Color32(255, 0, 0));
 ```
 
 #### Restore Standalone Player window border color to system default
@@ -143,7 +143,7 @@ Argument:
 - Titlebar background color (`UnityEngine.Color` or `UnityEngine.Color32`(recommended))
 ```csharp
 // Color to Standalone Player window titlebar blue
-HW.UnityPlayerWindowVisual.WindowTitlebarColor.Set(new UnityEngine.Color32(0, 0, 1));
+HW.UnityPlayerWindowVisual.WindowTitlebarColor.Set(new UnityEngine.Color32(0, 0, 255));
 ```
 
 #### Restore Standalone Player window titlebar background color to system default
@@ -161,7 +161,7 @@ Argument:
 - Titlebar text color (`UnityEngine.Color` or `UnityEngine.Color32`(recommended))
 ```csharp
 // Color to Standalone Player window titlebar text green
-HW.UnityPlayerWindowVisual.WindowTitlebarTextColor.Set(new UnityEngine.Color32(0, 1, 0));
+HW.UnityPlayerWindowVisual.WindowTitlebarTextColor.Set(new UnityEngine.Color32(0, 255, 0));
 ```
 
 #### Restore Standalone Player window titlebar text color to system default
@@ -180,13 +180,13 @@ This package has multiple-color setting mode below...
 As with single-color setting mode, can use `Set` method(set any color) and `SetDefault` method(restore color to default)
 ```csharp
 // Color to Standalone Player window border and titlebar green
-HW.UnityPlayerWindowVisual.WindowAroundColors.Set(new UnityEngine.Color32(1, 1, 0));
+HW.UnityPlayerWindowVisual.WindowAroundColors.Set(new UnityEngine.Color32(255, 255, 0));
 
 // Color to Standalone Player window titlebar black and color to Standalone Player window titlebar text red
-HW.UnityPlayerWindowVisual.WindowTitlebarColors.Set(new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(1, 0, 0));
+HW.UnityPlayerWindowVisual.WindowTitlebarColors.Set(new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(255, 0, 0));
 
 // Color to Standalone Player window border and titlebar text red and color to Standalone Player window titlebar black
-HW.UnityPlayerWindowVisual.WindowColors.Set(new UnityEngine.Color32(1, 0, 0), new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(1, 0, 0));
+HW.UnityPlayerWindowVisual.WindowColors.Set(new UnityEngine.Color32(255, 0, 0), new UnityEngine.Color32(0, 0, 0), new UnityEngine.Color32(255, 0, 0));
 ```
 Tips: If you color to same color between border and titlebar, you can skip one argument
 
