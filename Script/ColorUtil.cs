@@ -19,6 +19,16 @@ namespace HW.UnityPlayerWindowVisual
     internal static class ColorUtil
     {
         /// <summary>
+        /// システム既定の色を使用することを示す値
+        /// </summary>
+        internal const uint DwmDefaultColor = 0xffffffff;
+        /// <summary>
+        /// 色を使用しないことを示す値
+        /// </summary>
+        internal const uint DwmNoneColor = 0xfffffffe;
+
+
+        /// <summary>
         /// 色から色を示す値を取得する
         /// </summary>
         /// <param name="color">色</param>
