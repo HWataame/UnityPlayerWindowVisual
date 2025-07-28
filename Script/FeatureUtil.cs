@@ -45,7 +45,7 @@ namespace HW.UnityPlayerWindowVisual
         /// ウィンドウの色を設定する(内部処理)
         /// </summary>
         /// <param name="attributeType">属性値</param>
-        /// <param name="colorValue">縁の色</param>
+        /// <param name="colorValue">色を示す値</param>
         /// <param name="typeName">型名</param>
         /// <param name="kindNameJapanese">種類名(日本語)</param>
         /// <param name="kindNameEnglish">種類名(英語)</param>
