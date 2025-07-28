@@ -14,15 +14,23 @@ using UnityEngine;
 namespace HW.UnityPlayerWindowVisual
 {
     /// <summary>
-    /// ウィンドウの周囲の色を操作するクラス
+    /// JP: ウィンドウの周囲の色を操作するクラス
+    /// EN: Processes of Standalone Player window border and titlebar color
     /// </summary>
     public static class WindowAroundColors
     {
         /// <summary>
-        /// ウィンドウの周囲の色を設定する
+        /// JP: ウィンドウの周囲の色を設定する<br />
+        /// EN: Set Standalone Player window border and titlebar color
         /// </summary>
-        /// <param name="color">ウィンドウの周囲の色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="color">
+        /// JP: ウィンドウの周囲の色<br />
+        /// EN: Window border and titlebar color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color color)
         {
@@ -36,10 +44,17 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの周囲の色を設定する
+        /// JP: ウィンドウの周囲の色を設定する<br />
+        /// EN: Set Standalone Player window border and titlebar color
         /// </summary>
-        /// <param name="color">ウィンドウの周囲の色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="color">
+        /// JP: ウィンドウの周囲の色<br />
+        /// EN: Window border and titlebar color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color32 color)
         {
@@ -53,11 +68,21 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの周囲の色を設定する
+        /// JP: ウィンドウの周囲の色を設定する<br />
+        /// EN: Set Standalone Player window border and titlebar color
         /// </summary>
-        /// <param name="borderColor">ウィンドウの縁の色</param>
-        /// <param name="titlebarColor">ウィンドウのタイトルバーの色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="borderColor">
+        /// JP: ウィンドウの縁の色<br />
+        /// EN: Window border color
+        /// </param>
+        /// <param name="titlebarColor">
+        /// JP: ウィンドウのタイトルバーの色<br />
+        /// EN: Window titlebar color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color borderColor, Color titlebarColor)
         {
@@ -69,11 +94,21 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの周囲の色を設定する
+        /// JP: ウィンドウの周囲の色を設定する<br />
+        /// EN: Set Standalone Player window border and titlebar color
         /// </summary>
-        /// <param name="borderColor">ウィンドウの縁の色</param>
-        /// <param name="titlebarColor">ウィンドウのタイトルバーの色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="borderColor">
+        /// JP: ウィンドウの縁の色<br />
+        /// EN: Window border color
+        /// </param>
+        /// <param name="titlebarColor">
+        /// JP: ウィンドウのタイトルバーの色<br />
+        /// EN: Window titlebar color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color32 borderColor, Color32 titlebarColor)
         {
@@ -85,9 +120,13 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの周囲の色をシステムの既定値に設定する
+        /// JP: ウィンドウの周囲の色をシステムの既定値に設定する<br />
+        /// EN: Set Standalone Player window border and titlebar color to system default
         /// </summary>
-        /// <returns>処理結果</returns>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool SetDefault()
         {

@@ -14,7 +14,8 @@ using UnityEngine;
 namespace HW.UnityPlayerWindowVisual
 {
     /// <summary>
-    /// タイトルバーの色を操作するクラス
+    /// JP: タイトルバーの色を操作するクラス
+    /// EN: Processes of Standalone Player window titlebar color
     /// </summary>
     public static class WindowTitlebarColor
     {
@@ -25,10 +26,17 @@ namespace HW.UnityPlayerWindowVisual
 
 
         /// <summary>
-        /// タイトルバーの色を設定する
+        /// JP: タイトルバーの色を設定する<br />
+        /// EN: Set Standalone Player window titlebar color
         /// </summary>
-        /// <param name="color">タイトルバーの色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="color">
+        /// JP: タイトルバーの色<br />
+        /// EN: Window titlebar color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color color)
         {
@@ -38,10 +46,17 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// タイトルバーの色を設定する
+        /// JP: タイトルバーの色を設定する<br />
+        /// EN: Set Standalone Player window titlebar color
         /// </summary>
-        /// <param name="color">タイトルバーの色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="color">
+        /// JP: タイトルバーの色<br />
+        /// EN: Window titlebar color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color32 color)
         {
@@ -51,9 +66,13 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// タイトルバーの色をシステムの既定値に設定する
+        /// JP: タイトルバーの色をシステムの既定値に設定する<br />
+        /// EN: Set Standalone Player window titlebar color to system default
         /// </summary>
-        /// <returns>処理結果</returns>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool SetDefault()
         {

@@ -18,7 +18,8 @@ using CommonMainWindowHandle = HW.UnityPlayerWindowHandle.UnityPlayerWindow;
 namespace HW.UnityPlayerWindowVisual
 {
     /// <summary>
-    /// HW.UnityPlayerWindowVisualパッケージの機能に関する処理を保持するクラス
+    /// JP: HW.UnityPlayerWindowVisualパッケージの機能に関する処理を保持するクラス<br />
+    /// EN: Processes about feature of HW.UnityPlayerWindowVisual package
     /// </summary>
     public static class FeatureUtil
     {
@@ -28,7 +29,8 @@ namespace HW.UnityPlayerWindowVisual
         private static bool isOutputLog = true;
 
         /// <summary>
-        /// ログを出力するか
+        /// JP: ログを出力するか<br />
+        /// EN: Does output "executing from unsupported environment" warning logs?
         /// </summary>
         public static bool IsOutputLog
         {

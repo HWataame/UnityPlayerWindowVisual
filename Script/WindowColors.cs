@@ -14,16 +14,27 @@ using UnityEngine;
 namespace HW.UnityPlayerWindowVisual
 {
     /// <summary>
-    /// ウィンドウの縁とタイトルバー全体の色を操作するクラス
+    /// JP: ウィンドウの縁とタイトルバー全体の色を操作するクラス
+    /// EN: Processes of Standalone Player window border, titlebar and titlebar text color
     /// </summary>
     public static class WindowColors
     {
         /// <summary>
-        /// ウィンドウの色を設定する
+        /// JP: ウィンドウの色を設定する<br />
+        /// EN: Set Standalone Player window colors
         /// </summary>
-        /// <param name="aroundColor">ウィンドウの周囲の色</param>
-        /// <param name="titlebarTextColor">ウィンドウのタイトルバーの文字色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="aroundColor">
+        /// JP: ウィンドウの周囲の色<br />
+        /// EN: Window border and titlebar color
+        /// </param>
+        /// <param name="titlebarTextColor">
+        /// JP: ウィンドウのタイトルバーの文字色<br />
+        /// EN: Window titlebar text color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color aroundColor, Color titlebarTextColor)
         {
@@ -38,11 +49,21 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの色を設定する
+        /// JP: ウィンドウの色を設定する<br />
+        /// EN: Set Standalone Player window colors
         /// </summary>
-        /// <param name="aroundColor">ウィンドウの周囲の色</param>
-        /// <param name="titlebarTextColor">ウィンドウのタイトルバーの文字色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="aroundColor">
+        /// JP: ウィンドウの周囲の色<br />
+        /// EN: Window border and titlebar color
+        /// </param>
+        /// <param name="titlebarTextColor">
+        /// JP: ウィンドウのタイトルバーの文字色<br />
+        /// EN: Window titlebar text color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color32 aroundColor, Color32 titlebarTextColor)
         {
@@ -57,12 +78,25 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの色を設定する
+        /// JP: ウィンドウの色を設定する<br />
+        /// EN: Set Standalone Player window colors
         /// </summary>
-        /// <param name="borderColor">ウィンドウの縁の色</param>
-        /// <param name="titlebarColor">ウィンドウのタイトルバーの色</param>
-        /// <param name="titlebarTextColor">ウィンドウのタイトルバーの文字色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="borderColor">
+        /// JP: ウィンドウの縁の色<br />
+        /// EN: Window border color
+        /// </param>
+        /// <param name="titlebarColor">
+        /// JP: ウィンドウのタイトルバーの色<br />
+        /// EN: Window titlebar color
+        /// </param>
+        /// <param name="titlebarTextColor">
+        /// JP: ウィンドウのタイトルバーの文字色<br />
+        /// EN: Window titlebar text color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color borderColor, Color titlebarColor, Color titlebarTextColor)
         {
@@ -74,12 +108,25 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの色を設定する
+        /// JP: ウィンドウの色を設定する<br />
+        /// EN: Set Standalone Player window colors
         /// </summary>
-        /// <param name="borderColor">ウィンドウの縁の色</param>
-        /// <param name="titlebarColor">ウィンドウのタイトルバーの色</param>
-        /// <param name="titlebarTextColor">ウィンドウのタイトルバーの文字色</param>
-        /// <returns>処理結果</returns>
+        /// <param name="borderColor">
+        /// JP: ウィンドウの縁の色<br />
+        /// EN: Window border color
+        /// </param>
+        /// <param name="titlebarColor">
+        /// JP: ウィンドウのタイトルバーの色<br />
+        /// EN: Window titlebar color
+        /// </param>
+        /// <param name="titlebarTextColor">
+        /// JP: ウィンドウのタイトルバーの文字色<br />
+        /// EN: Window titlebar text color
+        /// </param>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Set(Color32 borderColor, Color32 titlebarColor, Color32 titlebarTextColor)
         {
@@ -91,9 +138,13 @@ namespace HW.UnityPlayerWindowVisual
         }
 
         /// <summary>
-        /// ウィンドウの色をシステムの既定値に設定する
+        /// JP: ウィンドウの色をシステムの既定値に設定する<br />
+        /// EN: Set Standalone Player window colors to system default
         /// </summary>
-        /// <returns>処理結果</returns>
+        /// <returns>
+        /// JP: 処理結果<br />
+        /// EN: Is Process succeed?
+        /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool SetDefault()
         {
