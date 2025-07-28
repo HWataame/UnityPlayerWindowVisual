@@ -4,7 +4,7 @@
 
 WindowAroundColors.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
@@ -30,9 +30,9 @@ namespace HW.UnityPlayerWindowVisual
             uint colorValue = ColorUtil.GetColorValueFrom(color);
 
             // ウィンドウの周囲の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowColorType.Around, colorValue, colorValue, 0,
-                typeof(WindowAroundColors).Name, "ウィンドウの周囲の色");
+            return FeatureUtil.SetInternal(WindowColorType.Around,
+                colorValue, colorValue, 0, typeof(WindowAroundColors).Name,
+                "ウィンドウの周囲の色", "Standalone Player window border and titlebar colors");
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace HW.UnityPlayerWindowVisual
             uint colorValue = ColorUtil.GetColorValueFrom(color);
 
             // ウィンドウの周囲の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowColorType.Around, colorValue, colorValue, 0,
-                typeof(WindowAroundColors).Name, "ウィンドウの周囲の色");
+            return FeatureUtil.SetInternal(WindowColorType.Around,
+                colorValue, colorValue, 0, typeof(WindowAroundColors).Name,
+                "ウィンドウの周囲の色", "Standalone Player window border and titlebar colors");
         }
 
         /// <summary>
@@ -62,10 +62,10 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color borderColor, Color titlebarColor)
         {
             // ウィンドウの周囲の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowColorType.Around, ColorUtil.GetColorValueFrom(borderColor),
-                ColorUtil.GetColorValueFrom(titlebarColor), 0,
-                typeof(WindowAroundColors).Name, "ウィンドウの周囲の色");
+            return FeatureUtil.SetInternal(WindowColorType.Around,
+                ColorUtil.GetColorValueFrom(borderColor),
+                ColorUtil.GetColorValueFrom(titlebarColor), 0, typeof(WindowAroundColors).Name,
+                "ウィンドウの周囲の色", "Standalone Player window border and titlebar colors");
         }
 
         /// <summary>
@@ -78,10 +78,10 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color32 borderColor, Color32 titlebarColor)
         {
             // ウィンドウの周囲の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowColorType.Around, ColorUtil.GetColorValueFrom(borderColor),
-                ColorUtil.GetColorValueFrom(titlebarColor), 0,
-                typeof(WindowAroundColors).Name, "ウィンドウの周囲の色");
+            return FeatureUtil.SetInternal(WindowColorType.Around,
+                ColorUtil.GetColorValueFrom(borderColor),
+                ColorUtil.GetColorValueFrom(titlebarColor), 0, typeof(WindowAroundColors).Name,
+                "ウィンドウの周囲の色", "Standalone Player window border and titlebar colors");
         }
 
         /// <summary>
@@ -92,9 +92,9 @@ namespace HW.UnityPlayerWindowVisual
         public static bool SetDefault()
         {
             // ウィンドウの周囲の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowColorType.Around, ColorUtil.DwmDefaultColor, ColorUtil.DwmDefaultColor,
-                0, typeof(WindowAroundColors).Name, "ウィンドウの周囲の色");
+            return FeatureUtil.SetInternal(WindowColorType.Around,
+                ColorUtil.DwmDefaultColor, ColorUtil.DwmDefaultColor, 0, typeof(WindowAroundColors).Name,
+                "ウィンドウの周囲の色", "Standalone Player window border and titlebar colors");
         }
     }
 }

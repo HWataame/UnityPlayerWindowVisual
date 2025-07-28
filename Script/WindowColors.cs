@@ -4,7 +4,7 @@
 
 WindowColors.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
@@ -34,7 +34,7 @@ namespace HW.UnityPlayerWindowVisual
             return FeatureUtil.SetInternal(
                 WindowColorType.All, aroundColorValue, aroundColorValue,
                 ColorUtil.GetColorValueFrom(titlebarTextColor),
-                typeof(WindowColors).Name, "ウィンドウの色");
+                typeof(WindowColors).Name, "ウィンドウの色", "Window colors");
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace HW.UnityPlayerWindowVisual
             return FeatureUtil.SetInternal(
                 WindowColorType.All, aroundColorValue, aroundColorValue,
                 ColorUtil.GetColorValueFrom(titlebarTextColor),
-                typeof(WindowColors).Name, "ウィンドウの色");
+                typeof(WindowColors).Name, "ウィンドウの色", "Window colors");
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace HW.UnityPlayerWindowVisual
             return FeatureUtil.SetInternal(
                 WindowColorType.Around, ColorUtil.GetColorValueFrom(borderColor),
                 ColorUtil.GetColorValueFrom(titlebarColor), ColorUtil.GetColorValueFrom(titlebarTextColor),
-                typeof(WindowColors).Name, "ウィンドウの色");
+                typeof(WindowColors).Name, "ウィンドウの色", "Window colors");
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace HW.UnityPlayerWindowVisual
             return FeatureUtil.SetInternal(
                 WindowColorType.Around, ColorUtil.GetColorValueFrom(borderColor),
                 ColorUtil.GetColorValueFrom(titlebarColor), ColorUtil.GetColorValueFrom(titlebarTextColor),
-                typeof(WindowColors).Name, "ウィンドウの色");
+                typeof(WindowColors).Name, "ウィンドウの色", "Window colors");
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace HW.UnityPlayerWindowVisual
             // ウィンドウの色の設定を試行する
             return FeatureUtil.SetInternal(
                 WindowColorType.Around, ColorUtil.DwmDefaultColor, ColorUtil.DwmDefaultColor,
-                ColorUtil.DwmDefaultColor, typeof(WindowColors).Name, "ウィンドウの色");
+                ColorUtil.DwmDefaultColor, typeof(WindowColors).Name, "ウィンドウの色", "Window colors");
         }
     }
 }

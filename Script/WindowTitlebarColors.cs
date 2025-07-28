@@ -4,7 +4,7 @@
 
 WindowTitlebarColors.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
@@ -28,10 +28,10 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color titlebarColor, Color titlebarTextColor)
         {
             // ウィンドウのタイトルバー全体の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowColorType.WholeOfTitlebar, 0,
-                ColorUtil.GetColorValueFrom(titlebarColor), ColorUtil.GetColorValueFrom(titlebarTextColor),
-                typeof(WindowTitlebarColors).Name, "ウィンドウのタイトルバー全体の色");
+            return FeatureUtil.SetInternal(WindowColorType.WholeOfTitlebar, 0,
+                ColorUtil.GetColorValueFrom(titlebarColor),
+                ColorUtil.GetColorValueFrom(titlebarTextColor), typeof(WindowTitlebarColors).Name,
+                "ウィンドウのタイトルバー全体の色", "Standalone Player window titlebar and text colors");
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace HW.UnityPlayerWindowVisual
         {
             // ウィンドウのタイトルバー全体の色の設定を試行する
             return FeatureUtil.SetInternal(
-                WindowColorType.WholeOfTitlebar, 0,
-                ColorUtil.GetColorValueFrom(titlebarColor), ColorUtil.GetColorValueFrom(titlebarTextColor),
-                typeof(WindowTitlebarColors).Name, "ウィンドウのタイトルバー全体の色");
+                WindowColorType.WholeOfTitlebar, 0, ColorUtil.GetColorValueFrom(titlebarColor),
+                ColorUtil.GetColorValueFrom(titlebarTextColor), typeof(WindowTitlebarColors).Name,
+                "ウィンドウのタイトルバー全体の色", "Standalone Player window titlebar and text colors");
         }
 
         /// <summary>
@@ -59,9 +59,9 @@ namespace HW.UnityPlayerWindowVisual
         {
             // ウィンドウのタイトルバー全体の色の設定を試行する
             return FeatureUtil.SetInternal(
-                WindowColorType.WholeOfTitlebar, 0,
-                ColorUtil.DwmDefaultColor, ColorUtil.DwmDefaultColor,
-                typeof(WindowTitlebarColors).Name, "ウィンドウのタイトルバー全体の色");
+                WindowColorType.WholeOfTitlebar, 0, ColorUtil.DwmDefaultColor,
+                ColorUtil.DwmDefaultColor, typeof(WindowTitlebarColors).Name,
+                "ウィンドウのタイトルバー全体の色", "Standalone Player window titlebar and text colors");
         }
     }
 }

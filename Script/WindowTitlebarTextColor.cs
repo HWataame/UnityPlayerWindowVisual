@@ -4,7 +4,7 @@
 
 WindowTitlebarTextColor.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
@@ -33,9 +33,9 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color color)
         {
             // タイトルバーの文字色の設定を試行する
-            return FeatureUtil.SetInternal(
-                DwmWindowCaptionTextColor, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowTitlebarTextColor).Name, "タイトルバーの文字色");
+            return FeatureUtil.SetInternal(DwmWindowCaptionTextColor,
+                ColorUtil.GetColorValueFrom(color), typeof(WindowTitlebarTextColor).Name,
+                "タイトルバーの文字色", "Standalone Player window Titlebar text color");
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color32 color)
         {
             // タイトルバーの文字色の設定を試行する
-            return FeatureUtil.SetInternal(
-                DwmWindowCaptionTextColor, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowTitlebarTextColor).Name, "タイトルバーの文字色");
+            return FeatureUtil.SetInternal(DwmWindowCaptionTextColor,
+                ColorUtil.GetColorValueFrom(color), typeof(WindowTitlebarTextColor).Name,
+                "タイトルバーの文字色", "Standalone Player window Titlebar text color");
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace HW.UnityPlayerWindowVisual
         public static bool SetDefault()
         {
             // タイトルバーの文字色の設定を試行する
-            return FeatureUtil.SetInternal(
-                DwmWindowCaptionTextColor, ColorUtil.DwmDefaultColor,
-                typeof(WindowTitlebarTextColor).Name, "タイトルバーの文字色");
+            return FeatureUtil.SetInternal(DwmWindowCaptionTextColor,
+                ColorUtil.DwmDefaultColor, typeof(WindowTitlebarTextColor).Name,
+                "タイトルバーの文字色", "Standalone Player window Titlebar text color");
         }
     }
 }

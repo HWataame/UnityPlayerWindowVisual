@@ -4,7 +4,7 @@
 
 WindowBorderColor.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
@@ -33,9 +33,8 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color color)
         {
             // ウィンドウの縁の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowBorderColorAttribute, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowBorderColor).Name, "ウィンドウの縁の色");
+            return FeatureUtil.SetInternal(WindowBorderColorAttribute, ColorUtil.GetColorValueFrom(color),
+                typeof(WindowBorderColor).Name, "ウィンドウの縁の色", "Standalone Player window border color");
         }
 
         /// <summary>
@@ -47,9 +46,8 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color32 color)
         {
             // ウィンドウの縁の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowBorderColorAttribute, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowBorderColor).Name, "ウィンドウの縁の色");
+            return FeatureUtil.SetInternal(WindowBorderColorAttribute, ColorUtil.GetColorValueFrom(color),
+                typeof(WindowBorderColor).Name, "ウィンドウの縁の色", "Standalone Player window border color");
         }
 
         /// <summary>
@@ -60,9 +58,8 @@ namespace HW.UnityPlayerWindowVisual
         public static bool SetDefault()
         {
             // ウィンドウの縁の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowBorderColorAttribute, ColorUtil.DwmDefaultColor,
-                typeof(WindowBorderColor).Name, "ウィンドウの縁の色");
+            return FeatureUtil.SetInternal(WindowBorderColorAttribute, ColorUtil.DwmDefaultColor,
+                typeof(WindowBorderColor).Name, "ウィンドウの縁の色", "Standalone Player window border color");
         }
 
         /// <summary>
@@ -73,9 +70,8 @@ namespace HW.UnityPlayerWindowVisual
         public static bool SetNoneBorder()
         {
             // ウィンドウの縁の色の設定を試行する
-            return FeatureUtil.SetInternal(
-                WindowBorderColorAttribute, ColorUtil.DwmNoneColor,
-                typeof(WindowBorderColor).Name, "ウィンドウの縁");
+            return FeatureUtil.SetInternal(WindowBorderColorAttribute, ColorUtil.DwmNoneColor,
+                typeof(WindowBorderColor).Name, "ウィンドウの縁", "Standalone Player window border");
         }
     }
 }

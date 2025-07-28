@@ -4,7 +4,7 @@
 
 WindowTitlebarColor.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
@@ -33,9 +33,8 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color color)
         {
             // タイトルバーの色の設定を試行する
-            return FeatureUtil.SetInternal(
-                DwmWindowCaptionColor, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowTitlebarColor).Name, "タイトルバーの色");
+            return FeatureUtil.SetInternal(DwmWindowCaptionColor, ColorUtil.GetColorValueFrom(color),
+                typeof(WindowTitlebarColor).Name, "タイトルバーの色", "Standalone Player window Titlebar color");
         }
 
         /// <summary>
@@ -47,9 +46,8 @@ namespace HW.UnityPlayerWindowVisual
         public static bool Set(Color32 color)
         {
             // タイトルバーの色の設定を試行する
-            return FeatureUtil.SetInternal(
-                DwmWindowCaptionColor, ColorUtil.GetColorValueFrom(color),
-                typeof(WindowTitlebarColor).Name, "タイトルバーの色");
+            return FeatureUtil.SetInternal(DwmWindowCaptionColor, ColorUtil.GetColorValueFrom(color),
+                typeof(WindowTitlebarColor).Name, "タイトルバーの色", "Standalone Player window Titlebar color");
         }
 
         /// <summary>
@@ -60,9 +58,8 @@ namespace HW.UnityPlayerWindowVisual
         public static bool SetDefault()
         {
             // タイトルバーの色の設定を試行する
-            return FeatureUtil.SetInternal(
-                DwmWindowCaptionColor, ColorUtil.DwmDefaultColor,
-                typeof(WindowTitlebarColor).Name, "タイトルバーの色");
+            return FeatureUtil.SetInternal(DwmWindowCaptionColor, ColorUtil.DwmDefaultColor,
+                typeof(WindowTitlebarColor).Name, "タイトルバーの色", "Standalone Player window Titlebar color");
         }
     }
 }
