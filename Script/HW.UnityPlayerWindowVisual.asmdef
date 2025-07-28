@@ -1,7 +1,9 @@
 {
     "name": "HW.UnityPlayerWindowVisual",
     "rootNamespace": "HW.UnityPlayerWindowVisual",
-    "references": [],
+    "references": [
+        "GUID:787ff926349358c4fb04cc68562b40aa"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

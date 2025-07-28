@@ -4,16 +4,16 @@ HW.UnityPlayerWindowVisualパッケージの機能に関する処理を保持す
 
 FeatureUtil.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
-using AOT;
 using HW.UnityPlayerWindowVisual.Libraries;
-using System;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using UnityEngine;
+#if HAS_COMMON_MAIN_WINDOW_HANDLE_GETTER_HW
+using CommonMainWindowHandle = HW.UnityPlayerWindowHandle.UnityPlayerWindow;
+#endif
 
 namespace HW.UnityPlayerWindowVisual
 {
@@ -22,35 +22,10 @@ namespace HW.UnityPlayerWindowVisual
     /// </summary>
     public static class FeatureUtil
     {
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        /// <summary>
-        /// 処理を許可するか
-        /// </summary>
-        private static readonly bool isAllowProcess;
-        /// <summary>
-        /// SetWindowColorCallbackのデリゲートのキャッシュ
-        /// </summary>
-        private static readonly User32Wrapper.SingleEnumWindowsProc SetWindowColorCallbackCache;
-        /// <summary>
-        /// SetWindowColorsCallbackのデリゲートのキャッシュ
-        /// </summary>
-        private static readonly User32Wrapper.MultiEnumWindowsProc SetWindowColorsCallbackCache;
-
-        /// <summary>
-        /// 色の種類に対応する属性値
-        /// </summary>
-        private static readonly uint[] ColorTypeAttributes =
-        {
-            WindowBorderColor.WindowBorderColorAttribute,
-            WindowTitlebarColor.DwmWindowCaptionColor,
-            WindowTitlebarTextColor.DwmWindowCaptionTextColor
-        };
-#endif
-
         /// <summary>
         /// ログを出力するか
         /// </summary>
-        private static bool isOutputLog;
+        private static bool isOutputLog = true;
 
         /// <summary>
         /// ログを出力するか
@@ -65,56 +40,37 @@ namespace HW.UnityPlayerWindowVisual
 
 
         /// <summary>
-        /// 初期化処理
-        /// </summary>
-        static FeatureUtil()
-        {
-            // ログ出力を有効化する
-            isOutputLog = true;
-
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-            // 現在の環境がWindowsのスタンドアロンプレイヤーか判定する
-            isAllowProcess = Application.platform == RuntimePlatform.WindowsPlayer;
-
-            // SetWindowColorCallbackのデリゲートをキャッシュする
-            SetWindowColorCallbackCache = SetWindowColorCallback;
-
-            // SetWindowColorsCallbackのデリゲートをキャッシュする
-            SetWindowColorsCallbackCache = SetWindowColorsCallback;
-#endif
-        }
-
-        /// <summary>
         /// ウィンドウの色を設定する(内部処理)
         /// </summary>
         /// <param name="attributeType">属性値</param>
-        /// <param name="colorValue">色を示す値</param>
+        /// <param name="colorValue">縁の色</param>
         /// <param name="typeName">型名</param>
-        /// <param name="kindName">値の種類名</param>
+        /// <param name="kindNameJapanese">種類名(日本語)</param>
+        /// <param name="kindNameEnglish">種類名(英語)</param>
         /// <returns>処理結果</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool SetInternal(
-            uint attributeType, uint colorValue, string typeName, string kindName)
+        internal static bool SetInternal(uint attributeType, uint colorValue,
+            string typeName, string kindNameJapanese, string kindNameEnglish)
         {
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-            if (isAllowProcess)
+            if (IsHandleValid())
             {
-                // 実行が許可される場合
-                // パラメーターを準備する
-                var parameters = new SetWindowColorCallbackParameters(
-                    attributeType, Kernel32Wrapper.GetCurrentProcessId(), colorValue);
-
-                // トップレベルのウィンドウを処理する
-                return User32Wrapper.EnumWindows(SetWindowColorCallbackCache, ref parameters);
+                // スタンドアロンプレイヤーのメインウィンドウの
+                // ウィンドウハンドルが有効である場合はウィンドウの色を設定する
+                return DwmApiWrapper.DwmSetWindowAttribute(GetWindowHandle(), attributeType,
+                    ref colorValue, DwmApiWrapper.WindowColorValueDataSize) == HResult.Ok;
             }
             else
             {
-                // 実行が許可されない(WindowsのUnityEditor)場合は失敗
+                // スタンドアロンプレイヤーのメインウィンドウのウィンドウハンドルが
+                // 有効ではない(WindowsのUnityEditorなど)場合は失敗
                 if (isOutputLog)
                 {
-                    Debug.LogWarning($"[UnityPlayerWindowVisual.{typeName ?? "(不明な型)"}] " +
-                        "Windowsのスタンドアロンプレイヤー以外の環境" +
-                        $"({Application.platform})から{kindName ?? "(不明値)"}を設定しようとしました");
+                    Debug.LogWarning($"[UnityPlayerWindowVisual.{typeName}]\n" +
+                        "\tJP: Windowsのスタンドアロンプレイヤー以外の環境" +
+                        $"({Application.platform})から{kindNameJapanese}を設定しようとしました\n" +
+                        $"EN: Trying to set {kindNameEnglish} from except Windows Standalone Player on Windows" +
+                        $" ({Application.platform})");
                 }
                 return false;
             }
@@ -122,41 +78,13 @@ namespace HW.UnityPlayerWindowVisual
             // Windows環境以外である場合は失敗
             if (isOutputLog)
             {
-                Debug.LogWarning($"[UnityPlayerWindowVisual.{typeName ?? "(不明な型)"}] " +
-                    $"Windows以外の環境({Application.platform})から{kindName ?? "(不明値)"}を設定しようとしました");
+                Debug.LogWarning("[UnityPlayerWindowVisual.{typeName}]\n" +
+                    $"\tJP: Windows以外の環境({Application.platform})から{kindNameJapanese}を設定しようとしました\n" +
+                    $"\tEN: Trying to set {kindNameEnglish} from except Windows ({Application.platform})");
             }
             return false;
 #endif
         }
-
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-        /// <summary>
-        /// ウィンドウの色を設定する処理のコールバック関数
-        /// </summary>
-        /// <param name="windowHandle">ウィンドウハンドル</param>
-        /// <param name="parameters">パラメーター</param>
-        /// <returns>処理を続行するか</returns>
-        [MonoPInvokeCallback(typeof(User32Wrapper.SingleEnumWindowsProc))]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static bool SetWindowColorCallback(
-            nint windowHandle, ref SetWindowColorCallbackParameters parameters)
-        {
-            if (User32Wrapper.GetWindowThreadProcessId(windowHandle, out var processId) == 0 ||
-                parameters.ProcessId != processId)
-            {
-                // 現在のプロセスIDとウィンドウを生成したプロセスのIDが異なる場合は何もしない
-                return true;
-            }
-
-            // ウィンドウの色を設定する
-            uint colorValue = parameters.ColorValue;
-            DwmApiWrapper.DwmSetWindowAttribute(
-                windowHandle, parameters.AttributeType,
-                ref colorValue, DwmApiWrapper.WindowColorValueDataSize);
-
-            return true;
-        }
-#endif
 
         /// <summary>
         /// ウィンドウの複数の色を設定する(内部処理)
@@ -166,33 +94,58 @@ namespace HW.UnityPlayerWindowVisual
         /// <param name="titlebarColorValue">タイトルバーの色を示す値</param>
         /// <param name="titlebarTextColorValue">タイトルバーの文字色を示す値</param>
         /// <param name="typeName">型名</param>
-        /// <param name="kindName">値の種類名</param>
+        /// <param name="kindNameJapanese">種類名(日本語)</param>
+        /// <param name="kindNameEnglish">種類名(英語)</param>
         /// <returns>処理結果</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool SetInternal(
             WindowColorType type, uint borderColorValue, uint titlebarColorValue,
-            uint titlebarTextColorValue, string typeName, string kindName)
+            uint titlebarTextColorValue, string typeName, string kindNameJapanese, string kindNameEnglish)
         {
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-            if (isAllowProcess)
+            if (IsHandleValid())
             {
-                // 実行が許可される場合
-                // パラメーターを準備する
-                var parameters = new SetWindowColorsCallbackParameters(
-                    type, Kernel32Wrapper.GetCurrentProcessId(),
-                    borderColorValue, titlebarColorValue, titlebarTextColorValue);
+                // ウィンドウハンドルを取得する
+                var windowHandle = GetWindowHandle();
 
-                // トップレベルのウィンドウを処理する
-                return User32Wrapper.EnumWindows(SetWindowColorsCallbackCache, ref parameters);
+                // スタンドアロンプレイヤーのメインウィンドウのウィンドウハンドルが有効である場合
+                if ((type & WindowColorType.Border) != 0)
+                {
+                    // 縁の色を設定する場合
+                    DwmApiWrapper.DwmSetWindowAttribute(
+                        windowHandle, WindowBorderColor.WindowBorderColorAttribute,
+                        ref borderColorValue, DwmApiWrapper.WindowColorValueDataSize);
+                }
+
+                if ((type & WindowColorType.Titlebar) != 0)
+                {
+                    // タイトルバーの色を設定する場合
+                    DwmApiWrapper.DwmSetWindowAttribute(
+                        windowHandle, WindowTitlebarColor.DwmWindowCaptionColor,
+                        ref titlebarColorValue, DwmApiWrapper.WindowColorValueDataSize);
+                }
+
+                if ((type & WindowColorType.Titlebar) != 0)
+                {
+                    // タイトルバーの文字色を設定する場合
+                    DwmApiWrapper.DwmSetWindowAttribute(
+                        windowHandle, WindowTitlebarTextColor.DwmWindowCaptionTextColor,
+                        ref titlebarTextColorValue, DwmApiWrapper.WindowColorValueDataSize);
+                }
+
+                return true;
             }
             else
             {
-                // 実行が許可されない(WindowsのUnityEditor)場合は失敗
+                // スタンドアロンプレイヤーのメインウィンドウのウィンドウハンドルが
+                // 有効ではない(WindowsのUnityEditorなど)場合は失敗
                 if (isOutputLog)
                 {
-                    Debug.LogWarning($"[UnityPlayerWindowVisual.{typeName ?? "(不明な型)"}] " +
-                        "Windowsのスタンドアロンプレイヤー以外の環境" +
-                        $"({Application.platform})から{kindName ?? "(不明値)"}を設定しようとしました");
+                    Debug.LogWarning($"[UnityPlayerWindowVisual.{typeName}]\n" +
+                        "\tJP: Windowsのスタンドアロンプレイヤー以外の環境" +
+                        $"({Application.platform})から{kindNameJapanese}を設定しようとしました\n" +
+                        $"EN: Trying to set {kindNameEnglish} from except Windows Standalone Player on Windows" +
+                        $" ({Application.platform})");
                 }
                 return false;
             }
@@ -200,49 +153,44 @@ namespace HW.UnityPlayerWindowVisual
             // Windows環境以外である場合は失敗
             if (isOutputLog)
             {
-                Debug.LogWarning($"[UnityPlayerWindowVisual.{typeName ?? "(不明な型)"}] " +
-                    $"Windows以外の環境({Application.platform})から{kindName ?? "(不明値)"}を設定しようとしました");
+                Debug.LogWarning("[UnityPlayerWindowVisual.{typeName}]\n" +
+                    $"\tJP: Windows以外の環境({Application.platform})から{kindNameJapanese}を設定しようとしました\n" +
+                    $"\tEN: Trying to set {kindNameEnglish} from except Windows ({Application.platform})");
             }
             return false;
 #endif
         }
 
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
         /// <summary>
-        /// ウィンドウの複数の色を設定する処理のコールバック関数
+        /// ウィンドウハンドルが有効か判定する
         /// </summary>
-        /// <param name="windowHandle">ウィンドウハンドル</param>
-        /// <param name="parameters">パラメーター</param>
-        /// <returns>処理を続行するか</returns>
-        [MonoPInvokeCallback(typeof(User32Wrapper.MultiEnumWindowsProc))]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static bool SetWindowColorsCallback(
-            nint windowHandle, ref SetWindowColorsCallbackParameters parameters)
+        /// <returns>判定結果</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsHandleValid()
         {
-            if (User32Wrapper.GetWindowThreadProcessId(windowHandle, out var processId) == 0 ||
-                parameters.ProcessId != processId)
-            {
-                // 現在のプロセスIDとウィンドウを生成したプロセスのIDが異なる場合は何もしない
-                return true;
-            }
-
-            // 属性値を取得する
-            ReadOnlySpan<uint> attributes = ColorTypeAttributes;
-
-            // ウィンドウの色を設定する
-            for (int i = 0; i < attributes.Length; ++i)
-            {
-                var (isSet, colorValue) = parameters[i];
-                if (isSet)
-                {
-                    // 処理中の色が設定されている場合はウィンドウの色を設定する
-                    DwmApiWrapper.DwmSetWindowAttribute(windowHandle, attributes[i],
-                        ref colorValue, DwmApiWrapper.WindowColorValueDataSize);
-                }
-            }
-
-            return true;
-        }
+#if HAS_COMMON_MAIN_WINDOW_HANDLE_GETTER_HW
+            // 共通のウィンドウハンドル取得クラスが存在する場合
+            return CommonMainWindowHandle.IsHandleValid;
+#else
+            // 共通のウィンドウハンドル取得クラスが存在しない場合
+            return UnityPlayerWindow.IsHandleValid;
 #endif
+        }
+
+        /// <summary>
+        /// ウィンドウハンドルを取得する
+        /// </summary>
+        /// <returns>ウィンドウハンドル</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static nint GetWindowHandle()
+        {
+#if HAS_COMMON_MAIN_WINDOW_HANDLE_GETTER_HW
+            // 共通のウィンドウハンドル取得クラスが存在する場合
+            return CommonMainWindowHandle.MainWindowHandle;
+#else
+            // 共通のウィンドウハンドル取得クラスが存在しない場合
+            return UnityPlayerWindow.MainWindowHandle;
+#endif
+        }
     }
 }

@@ -4,12 +4,13 @@ user32.dllの関数を呼び出せるようにするラッパークラス
 
 User32Wrapper.cs
 ────────────────────────────────────────
-バージョン: 1.0.0
+バージョン: 1.0.1
 2025 Wataame(HWataame)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 */
-#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
+#if (UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN) && !HAS_COMMON_MAIN_WINDOW_HANDLE_GETTER_HW
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace HW.UnityPlayerWindowVisual.Libraries
 {
@@ -21,51 +22,25 @@ namespace HW.UnityPlayerWindowVisual.Libraries
         /// <summary>
         /// EnumWindowsのコールバック用のデリゲート型
         /// </summary>
-        /// <remarks>SetWindowColorCallbackParameterをパラメーターとして渡す用に引数を変更した版</remarks>
+        /// <remarks>32ビット符号なし整数値1個をパラメーターとして渡す用に引数を変更した版</remarks>
         /// <param name="windowHandle">ウィンドウハンドル</param>
-        /// <param name="parameters">パラメーター</param>
+        /// <param name="value">パラメーター</param>
         /// <returns>列挙を続行するか</returns>
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal delegate bool SingleEnumWindowsProc(
-            nint windowHandle, ref SetWindowColorCallbackParameters parameters);
-
-        /// <summary>
-        /// EnumWindowsのコールバック用のデリゲート型
-        /// </summary>
-        /// <remarks>SetWindowColorsCallbackParameterをパラメーターとして渡す用に引数を変更した版</remarks>
-        /// <param name="windowHandle">ウィンドウハンドル</param>
-        /// <param name="parameters">パラメーター</param>
-        /// <returns>列挙を続行するか</returns>
-        [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal delegate bool MultiEnumWindowsProc(
-            nint windowHandle, ref SetWindowColorsCallbackParameters parameters);
+        internal delegate bool UInt32EnumWindowsProc(nint windowHandle, ref uint value);
 
 
         /// <summary>
         /// ウィンドウを列挙する
         /// </summary>
-        /// <remarks>SetWindowColorCallbackParameterをパラメーターとして渡す用に引数を変更した版</remarks>
+        /// <remarks>32ビット符号なし整数値1個をパラメーターとして渡す用に引数を変更した版</remarks>
         /// <param name="callback">列挙用のコールバック</param>
-        /// <param name="parameters">パラメーター</param>
+        /// <param name="value">パラメーター</param>
         /// <returns>処理結果</returns>
         [DllImport("user32.dll", EntryPoint = "EnumWindows", CallingConvention = CallingConvention.Winapi)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool EnumWindows(
-            SingleEnumWindowsProc callback, ref SetWindowColorCallbackParameters parameters);
-
-        /// <summary>
-        /// ウィンドウを列挙する
-        /// </summary>
-        /// <remarks>SetWindowColorsCallbackParameterをパラメーターとして渡す用に引数を変更した版</remarks>
-        /// <param name="callback">列挙用のコールバック</param>
-        /// <param name="parameters">パラメーター</param>
-        /// <returns>処理結果</returns>
-        [DllImport("user32.dll", EntryPoint = "EnumWindows", CallingConvention = CallingConvention.Winapi)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool EnumWindows(
-            MultiEnumWindowsProc callback, ref SetWindowColorsCallbackParameters parameters);
+        internal static extern bool EnumWindows(UInt32EnumWindowsProc callback, ref uint value);
 
         /// <summary>
         /// ウィンドウを生成したスレッドとプロセスのIDを取得する
@@ -75,6 +50,19 @@ namespace HW.UnityPlayerWindowVisual.Libraries
         /// <returns>スレッドID</returns>
         [DllImport("user32.dll", EntryPoint = "GetWindowThreadProcessId", CallingConvention = CallingConvention.Winapi)]
         internal static extern uint GetWindowThreadProcessId(nint windowHandle, out uint processId);
+
+        /// <summary>
+        /// ウィンドウのクラス名を取得する
+        /// </summary>
+        /// <param name="windowHandle">ウィンドウハンドル</param>
+        /// <param name="className">クラス名</param>
+        /// <param name="maxCharCount">クラス名の最大文字数</param>
+        /// <returns>取得されたクラス名の文字数</returns>
+        [DllImport("user32.dll", EntryPoint = "GetClassNameW", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
+        internal static extern int GetClassName(
+            nint windowHandle,
+            [MarshalAs(UnmanagedType.LPWStr)] StringBuilder className,
+            int maxCharCount);
     }
 }
 #endif
