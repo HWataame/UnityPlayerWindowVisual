@@ -118,8 +118,6 @@ namespace HW.UnityPlayerWindowVisual
             }
 #endif
 
-            Debug.Log($"[WindowCorner] WindowHandle: [{isHandleValid}] {(ulong)mainWindowHandle:x16}");
-
             // 初期化済みフラグを立てる
             isInitialized = true;
         }
